@@ -27,6 +27,7 @@ module.exports = withBundleAnalyzer(
     },
     experimental: {
       serverComponentsExternalPackages: ["sharp", "onnxruntime-node"]
-    }
+    },
+    productionBrowserSourceMaps: true // 소스 맵 활성화
   })
 )

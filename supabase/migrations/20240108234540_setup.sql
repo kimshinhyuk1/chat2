@@ -1,8 +1,18 @@
 -- Enable HTTP extension
-create extension http with schema extensions;
+-- Enable HTTP extension if not exists
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_extension
+        WHERE extname = 'vector'
+    ) THEN
+        CREATE EXTENSION vector WITH SCHEMA extensions;
+    END IF;
+END$$;
+
 
 -- Enable vector extension
-create extension vector with schema extensions;
 
 -- Function to update modified column
 CREATE OR REPLACE FUNCTION update_updated_at_column()

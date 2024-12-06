@@ -1,15 +1,16 @@
-import { createClient, type CookieOptions } from "@supabase/supabase-js"
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { NextResponse, type NextRequest } from "next/server"
 
-export const createClient = (request: NextRequest) => {
-  // Create an unmodified response
+export const createEdgeSupabaseClient = (request: NextRequest) => {
+  // 기본 응답 객체 생성
   let response = NextResponse.next({
     request: {
       headers: request.headers
     }
   })
 
-  const supabase = createClient(
+  // Supabase 클라이언트 생성
+  const supabase = createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {

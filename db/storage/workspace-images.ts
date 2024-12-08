@@ -38,19 +38,3 @@ export const uploadWorkspaceImage = async (
 
   return filePath
 }
-
-export const getWorkspaceImageFromStorage = async (filePath: string) => {
-  try {
-    const { data, error } = await supabase.storage
-      .from("workspace_images")
-      .createSignedUrl(filePath, 60 * 60 * 24) // 24hrs
-
-    if (error) {
-      throw new Error("Error downloading workspace image")
-    }
-
-    return data.signedUrl
-  } catch (error) {
-    console.error(error)
-  }
-}
